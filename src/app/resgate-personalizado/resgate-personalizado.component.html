@@ -1,0 +1,80 @@
+<div class="p-5 bg-light">
+    <h2 class="mt-1">DADOS DO INVESTIMENTOS</h2>
+
+
+    <div class="card border border-2 border shadow-sm p-3 mb-4 bg-body rounded mt-4">
+        <div class="d-flex justify-content-start">
+            <div class="p-2 pt-3  ms-3">
+                <span class="material-icons">
+                    person
+                </span>
+            </div>
+            <div class="col ms-3">
+                Nome
+                <p>{{model.nome}}</p>
+
+            </div>
+            <div class="p-2 pt-3 border-start  border-start">
+                <span class="material-icons ms-3">
+                    show_chart
+                </span>
+            </div>
+            <div class="col ms-3 border-end">
+                OBJETIVO
+                <p>{{model.objetivo}}</p>
+
+            </div>
+            <div class="p-2 pt-3">
+                <span class="material-icons ms-3">
+                    monetization_on
+                </span>
+            </div>
+            <div class="col ms-3">
+                SALDO TOTAL
+                <p>{{model.saldoTotal | currencybrazil}}</p>
+
+            </div>
+        </div>
+    </div>
+
+
+    <h2 class="pt-3">RESGATE</h2>
+
+    <div class="card border border-2 shadow-sm p-3 mb-4 bg-body rounded mt-5">
+        <div class="row font-weight-bold p-lg-3">
+            <div class="col-md-4 font-weight-bold fw-bold">AÇÃO</div>
+            <div class="col-md-4 fw-bold">SALDO ACUMULADO</div>
+            <div class="col-md-3 fw-bold">VALOR A RESGATAR</div>
+        </div>
+        <form role="form" [formGroup]="form">
+            <div class="row font-weight-bold p-lg-3" *ngFor="let item of model.acoes">
+
+                <div class="col-md-4 font-weight-bold">
+                    <p class="fw-bold mb-lg-4">{{ item.nome }}</p>
+                </div>
+                <div class="col-md-4 font-weight-bold">
+                    <p class="fw-bold mb-lg-4">{{ saldoAcumulado(item) | currencybrazil }}</p>
+                </div>
+
+
+                <div class="col-md-4 font-weight-bold">
+                    <!--                 <input  type="text" class="form-control mb-3 border shadow-sm" placeholder="Digite quanto quer resgatar" (keyup)="changeSMSMessage($event,item)" currencyMask> -->
+                    <input type="text" class="form-control mb-3 border shadow-sm"
+                        placeholder="Digite quanto quer resgatar" formControlName="valorResgatar"
+                        (keyup)="changeSMSMessage($event,item)" currencyMask>
+                    <span class="invalid-feedback">
+                        O valor a resgatar não pode ser maior que R$ 2.614,13
+                    </span>
+                </div>
+            </div>
+        </form>
+
+    </div>
+    <div class="card border border-2">
+        <div class="font-weight-bold fw-bold mt-2 mb-lg-3 m-lg-4">Valor total do resgate: R$ 15.000,00</div>
+    </div>
+    <div class="d-flex justify-content-end">
+        <button type="button" class=" mt-4 btn btn-secondary mb-3">CANCELAR</button>
+        <button type="button" class=" mt-4 btn btn-primary ms-3 mb-3">CONFIRMAR RESGATE</button>
+    </div>
+</div>
